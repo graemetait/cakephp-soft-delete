@@ -26,10 +26,6 @@ class SoftDeletableBehavior extends ModelBehavior
 		} else {
 			$this->settings[$model->alias] = $this->defaults;
 		}
-
-		$this->settings[$model->alias]['column_type'] = $model->getColumnType(
-			$this->getFieldName($model)
-		);
 	}
 
 	/**
@@ -57,7 +53,7 @@ class SoftDeletableBehavior extends ModelBehavior
 
 	protected function findConditionToExcludeDeleted(Model $model)
 	{
-		switch ($this->settings[$model->alias]['column_type']) {
+		switch ($this->getDeletedFieldColumnType($model)) {
 			case 'boolean':
 				return array($this->getModelFieldName($model) => false);
 			case 'datetime':
@@ -83,7 +79,7 @@ class SoftDeletableBehavior extends ModelBehavior
 
 	protected function markRecordAsDeleted(Model $model)
 	{
-		switch ($this->settings[$model->alias]['column_type']) {
+		switch ($this->getDeletedFieldColumnType($model)) {
 			case 'boolean':
 				return $model->saveField($this->getFieldName($model), true);
 			case 'datetime':
@@ -172,5 +168,15 @@ class SoftDeletableBehavior extends ModelBehavior
 	{
 		$field_name = $this->getFieldName($model);
 		return "{$model->alias}.$field_name";
+	}
+
+	protected function getDeletedFieldColumnType(Model $model)
+	{
+		if (empty($this->settings[$model->alias]['column_type']))
+			$this->settings[$model->alias]['column_type'] = $model->getColumnType(
+				$this->getFieldName($model)
+			);
+
+		return $this->settings[$model->alias]['column_type'];
 	}
 }
