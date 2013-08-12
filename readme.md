@@ -16,7 +16,7 @@ If you're not, then clone/copy the contents of this directory to app/Plugins/Cak
 
 		CakePlugin::load('CakeSoftDelete');
 
-2. Change your AppModel to extend SoftDeletableModel. You'll alsp need to add an appropriate App::uses to tell Cake where to load SoftDeletableModel. Basically Your AppModel class should start something like this.
+2. Change your AppModel to extend SoftDeletableModel. You'll also need to add an appropriate App::uses to tell Cake where to load SoftDeletableModel. Basically Your AppModel class should start something like this.
 
 		<?php
 
