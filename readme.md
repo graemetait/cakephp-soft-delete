@@ -28,7 +28,7 @@ If you're not, then clone/copy the contents of this directory to app/Plugins/Cak
 
 		public $actsAs = array('CakeSoftDelete.SoftDeletable');
 
-4. Your model's database schema will need a field for to act as a flag for whether a record has been deleted. By default this field is called 'deleted', but this can be changed in the behavior's settings. The field can be either a boolean or datetime (in which case it will be set to the time the field was deleted).
+4. Your model's database schema will need a field to act as a flag for whether a record has been deleted. By default this field is called 'deleted', but this can be changed in the behavior's settings. The field can be either a boolean or datetime (in which case it will be set to the time the field was deleted).
 
 ## Usage
 
